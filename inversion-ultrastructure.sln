@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "inversion-messaging", "inve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inversion.Messaging", "submodules\inversion-messaging\Inversion.Messaging\Inversion.Messaging.csproj", "{18A7E8CB-CDB4-4846-8B5E-6E7D03178831}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ultrastructure.Demo2", "Ultrastructure.Demo2\Ultrastructure.Demo2.csproj", "{2D37386F-BFD5-497E-9147-FB1D1C4220EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{18A7E8CB-CDB4-4846-8B5E-6E7D03178831}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18A7E8CB-CDB4-4846-8B5E-6E7D03178831}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18A7E8CB-CDB4-4846-8B5E-6E7D03178831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D37386F-BFD5-497E-9147-FB1D1C4220EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D37386F-BFD5-497E-9147-FB1D1C4220EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D37386F-BFD5-497E-9147-FB1D1C4220EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D37386F-BFD5-497E-9147-FB1D1C4220EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

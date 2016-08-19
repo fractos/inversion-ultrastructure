@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Inversion.Extensibility.Extensions;
-using Inversion.Messaging.Model;
+
 using log4net;
 
+using Inversion.Extensibility.Extensions;
+using Inversion.Messaging.Model;
 using Inversion.Process;
 using Inversion.Process.Behaviour;
 using Inversion.Ultrastructure.Transport;

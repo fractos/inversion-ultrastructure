@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
-
 using Inversion.Data;
 using Inversion.Naiad;
 using Inversion.Process;
@@ -14,10 +15,9 @@ using log4net;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
-namespace Ultrastructure.Demo1
+namespace Ultrastructure.Demo2
 {
-    public class Program
-
+    class Program
     {
         private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -75,27 +75,28 @@ namespace Ultrastructure.Demo1
             return _requestToQuit;
         }
 
-        static void Main(string[] args)
+        static Task RunListener(string pipeline, TaskFactory taskFactory)
         {
-            TaskFactory taskFactory = new TaskFactory();
+            return PubSubLifecycle(taskFactory, CreatePipeline(String.Format("{0}-listener", pipeline)));
+        }
 
-            List<Task> pipelines = new List<Task>
+        static Task RunPump(TaskFactory taskFactory)
+        {
+            return taskFactory.StartNew(() =>
             {
-                //taskFactory.StartNew(() => { while(true) { } })
-                PubSubLifecycle(taskFactory, CreatePipeline("pipeline1")),
-                PubSubLifecycle(taskFactory, CreatePipeline("pipeline2"))
-            };
-
-            Task primaryPipeline = taskFactory.StartNew(() =>
-            {
-                IProcessContext context = CreatePipeline("pipeline0");
+                IProcessContext context = CreatePipeline("pipeline-pump");
 
                 while (!_requestToQuit)
                 {
                     context.Fire("process-request");
-                    System.Threading.Thread.Sleep(1);
+                    System.Threading.Thread.Sleep(1000);
                 }
             });
+        }
+
+        static void Main(string[] args)
+        {
+            TaskFactory taskFactory = new TaskFactory();
 
             Task requestToQuit = taskFactory.StartNew(() =>
             {
@@ -104,7 +105,18 @@ namespace Ultrastructure.Demo1
                 _requestToQuit = true;
             });
 
-            Task.WaitAll(pipelines.ToArray());
+            switch (args[0])
+            {
+                case "listener1":
+                    RunListener("pipeline1", taskFactory).Wait();
+                    break;
+                case "listener2":
+                    RunListener("pipeline2", taskFactory).Wait();
+                    break;
+                case "pump":
+                    RunPump(taskFactory).Wait();
+                    break;
+            }
         }
     }
 }
