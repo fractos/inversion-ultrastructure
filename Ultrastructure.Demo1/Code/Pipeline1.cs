@@ -17,23 +17,23 @@ namespace Ultrastructure.Demo1.Code
             registrar.RegisterService("application-behaviours",
                 container => new List<IProcessBehaviour>
                 {
-                    new HelloWorldBehaviour("hello-from-pipeline0",
+                    new HelloWorldBehaviour("hello-from-pump",
                         new Configuration.Builder
                         {
-                            {"config", "message", "hello from pipeline1" }
+                            {"config", "message", "hello from listener1" }
                         }),
 
-                    new SetContextItemsBehaviour("hello-from-pipeline0",
+                    new SetContextItemsBehaviour("hello-from-pump",
                         new Configuration.Builder
                         {
-                            {"context", "set", "source", "pipeline1" }
+                            {"context", "set", "source", "listener1" }
                         }),
 
-                    new PublishEventBehaviour("hello-from-pipeline0",
+                    new PublishEventBehaviour("hello-from-pump",
                         new Configuration.Builder
                         {
                             {"config", "transport", "pubsub" },
-                            {"config", "message", "hello-from-pipeline1" }
+                            {"config", "message", "hello-from-listener1" }
                         })
                 });
         }

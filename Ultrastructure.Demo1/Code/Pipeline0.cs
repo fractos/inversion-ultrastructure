@@ -19,14 +19,14 @@ namespace Ultrastructure.Demo1.Code
                     new SetContextItemsBehaviour("process-request",
                         new Configuration.Builder
                         {
-                            {"context", "set", "source", "pipeline0" }
+                            {"context", "set", "source", "pump" }
                         }),
 
                     new PublishEventBehaviour("process-request",
                         new Configuration.Builder
                         {
                             {"config", "transport", "pubsub" },
-                            {"config", "message", "hello-from-pipeline0" }
+                            {"config", "message", "hello-from-pump" }
                         })
                 });
         }

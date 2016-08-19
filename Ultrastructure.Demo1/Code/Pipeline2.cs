@@ -16,10 +16,10 @@ namespace Ultrastructure.Demo1.Code
             registrar.RegisterService("application-behaviours",
                 container => new List<IProcessBehaviour>
                 {
-                    new HelloWorldBehaviour("hello-from-pipeline1",
+                    new HelloWorldBehaviour("hello-from-listener1",
                         new Configuration.Builder
                         {
-                            {"config", "message", "hello from pipeline2" }
+                            {"config", "message", "hello from listener2" }
                         })
                 });
         }
