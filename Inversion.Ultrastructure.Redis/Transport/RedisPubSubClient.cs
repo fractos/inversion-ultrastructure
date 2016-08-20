@@ -44,7 +44,7 @@ namespace Inversion.Ultrastructure.Transport
                 }
 
                 subscriber.Unsubscribe(_channel);
-            });
+            }, TaskCreationOptions.LongRunning);
 
             subscriber.Subscribe(
                 _channel,

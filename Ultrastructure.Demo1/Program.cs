@@ -67,7 +67,7 @@ namespace Ultrastructure.Demo1
 
         static Task PubSubLifecycle(TaskFactory taskFactory, IProcessContext context)
         {
-            return taskFactory.StartNew(() => Lifecycle(context, TimeToGo));
+            return taskFactory.StartNew(() => Lifecycle(context, TimeToGo), TaskCreationOptions.LongRunning);
         }
 
         static bool TimeToGo()
@@ -95,14 +95,14 @@ namespace Ultrastructure.Demo1
                     context.Fire("process-request");
                     System.Threading.Thread.Sleep(1);
                 }
-            });
+            }, TaskCreationOptions.LongRunning);
 
             Task requestToQuit = taskFactory.StartNew(() =>
             {
                 Console.WriteLine("Press ENTER to quit.");
                 Console.ReadLine();
                 _requestToQuit = true;
-            });
+            }, TaskCreationOptions.LongRunning);
 
             Task.WaitAll(pipelines.ToArray());
         }
