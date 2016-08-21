@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 using Inversion.Data;
+using Inversion.Messaging.Model;
 using Inversion.Naiad;
 using Inversion.Process;
 using Inversion.Process.Behaviour;
@@ -34,7 +35,14 @@ namespace Ultrastructure.Demo1
             {
                 pubSubClient.Start();
 
-                pubSubClient.Subscribe(context, timeToGo);
+                pubSubClient.Subscribe(context, timeToGo, (eventChannel, eventValue) =>
+                {
+                    _log.Debug(String.Format("received {0}\r\n----\r\n", eventValue));
+
+                    IEvent ev = MessagingEvent.FromJson(context, eventValue);
+
+                    context.Fire(ev);
+                });
             }
         }
 

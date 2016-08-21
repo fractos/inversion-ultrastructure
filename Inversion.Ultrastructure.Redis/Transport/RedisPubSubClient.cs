@@ -29,7 +29,7 @@ namespace Inversion.Ultrastructure.Transport
             _cancellationCycleTimeMS = cancellationCycleTimeMS;
         }
 
-        public void Subscribe(IProcessContext context, Func<bool> timeToGo)
+        public void Subscribe(IProcessContext context, Func<bool> timeToGo, Action<string, string> handler)
         {
 
             ISubscriber subscriber = this.ConnectionMultiplexer.GetSubscriber();
@@ -48,14 +48,7 @@ namespace Inversion.Ultrastructure.Transport
 
             subscriber.Subscribe(
                 _channel,
-                (eventChannel, eventValue) =>
-                {
-                    IEvent ev = MessagingEvent.FromJson(context, eventValue);
-
-                    _log.Debug(String.Format("{0} received {1}\r\n----\r\n", _subscriberID, ev.Message));
-
-                    context.Fire(ev);
-                });
+                (eventChannel, eventValue) => handler(eventChannel, eventValue));
 
             cancellationTask.Wait();
         }
