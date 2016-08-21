@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9E7E524E-72A9-4782-99CB-7745E53DAF3F}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{7A733960-5E04-44A3-81A1-6F092081ADE4}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Inversion</RootNamespace>
-    <AssemblyName>Inversion.Ultrastructure</AssemblyName>
+    <RootNamespace>Ultrastructure.Demo3</RootNamespace>
+    <AssemblyName>Ultrastructure.Demo3</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,35 +34,41 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.0.316.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.0.414\lib\net45\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.0.34.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Microsoft.Bcl.Immutable.1.0.34\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Bcl.Immutable.1.0.34\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,14 +77,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITransportableData.cs" />
-    <Compile Include="Messaging\Model\MessagingEventWithControlState.cs" />
+    <Compile Include="Code\Behaviour\CreateHelloWorldTransportableDataBehaviour.cs" />
+    <Compile Include="Code\Behaviour\HelloWorldBehaviour.cs" />
+    <Compile Include="Code\Model\TransportableNamedTextData.cs" />
+    <Compile Include="Code\Pipeline1Listener.cs" />
+    <Compile Include="Code\Pipeline2Listener.cs" />
+    <Compile Include="Code\PipelinePump.cs" />
+    <Compile Include="Code\Settings.cs" />
+    <Compile Include="Code\Storage.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ultrastructure\Application\Behaviour\PublishEventWithControlStateBehaviour.cs" />
-    <Compile Include="Ultrastructure\Application\Behaviour\PublishEventBehaviour.cs" />
-    <Compile Include="Ultrastructure\Transport\IPubSubClient.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Inversion.Ultrastructure.Redis\Inversion.Ultrastructure.Redis.csproj">
+      <Project>{141cc9ac-77da-4dd7-afc7-10537a8990d1}</Project>
+      <Name>Inversion.Ultrastructure.Redis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Inversion.Ultrastructure\Inversion.Ultrastructure.csproj">
+      <Project>{9e7e524e-72a9-4782-99cb-7745e53daf3f}</Project>
+      <Name>Inversion.Ultrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\submodules\inversion-data\Inversion.Data.Redis\Inversion.Data.Redis.csproj">
+      <Project>{ce309caf-9930-4993-9643-37aba4bbda25}</Project>
+      <Name>Inversion.Data.Redis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\submodules\inversion-data\Inversion.Data\Inversion.Data.csproj">
       <Project>{1cb68d8f-fbce-4dac-858c-fed6fce48306}</Project>
       <Name>Inversion.Data</Name>
@@ -88,21 +117,22 @@
       <Project>{18a7e8cb-cdb4-4846-8b5e-6e7d03178831}</Project>
       <Name>Inversion.Messaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\submodules\inversion\Inversion.Naiad\Inversion.Naiad.csproj">
+      <Project>{975446b0-dbc2-498f-94d4-2a6a20f9c5d0}</Project>
+      <Name>Inversion.Naiad</Name>
+    </ProjectReference>
     <ProjectReference Include="..\submodules\inversion\Inversion.Process\Inversion.Process.csproj">
       <Project>{37f59768-76ea-4d09-8976-bbc3540db5ae}</Project>
       <Name>Inversion.Process</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\submodules\inversion\Inversion.Web\Inversion.Web.csproj">
+      <Project>{6951ba6b-4388-4fc8-8298-60da7563fee4}</Project>
+      <Name>Inversion.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\submodules\inversion\Inversion\Inversion.csproj">
       <Project>{a2dbf0b8-b672-4237-8a0b-864bb0474054}</Project>
       <Name>Inversion</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Ultrastructure\Data\" />
-    <Folder Include="Ultrastructure\Process\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

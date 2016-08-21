@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ultrastructure.Demo3", "Ultrastructure.Demo3\Ultrastructure.Demo3.csproj", "{7A733960-5E04-44A3-81A1-6F092081ADE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,10 @@ Global
 		{2D37386F-BFD5-497E-9147-FB1D1C4220EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D37386F-BFD5-497E-9147-FB1D1C4220EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D37386F-BFD5-497E-9147-FB1D1C4220EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A733960-5E04-44A3-81A1-6F092081ADE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A733960-5E04-44A3-81A1-6F092081ADE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A733960-5E04-44A3-81A1-6F092081ADE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A733960-5E04-44A3-81A1-6F092081ADE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
