@@ -35,7 +35,7 @@ namespace Ultrastructure.Demo1
             {
                 pubSubClient.Start();
 
-                pubSubClient.Subscribe(context, timeToGo, (eventChannel, eventValue) =>
+                pubSubClient.Subscribe(timeToGo, (eventChannel, eventValue) =>
                 {
                     _log.Debug(String.Format("received {0}\r\n----\r\n", eventValue));
 

@@ -7,7 +7,7 @@ namespace Inversion.Ultrastructure.Transport
 {
     public interface IPubSubClient : IStoreHealth
     {
-        void Subscribe(IProcessContext context, Func<bool> timeToGo, Action<string, string> handler);
-        void Publish(IEvent ev, IProcessContext context);
+        void Subscribe(Func<bool> timeToGo, Action<string, string> handler);
+        void Publish(IEvent ev);
     }
 }

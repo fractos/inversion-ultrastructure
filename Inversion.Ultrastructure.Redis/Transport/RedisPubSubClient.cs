@@ -1,35 +1,34 @@
 ﻿using System;
-using System.Reflection;
 using System.Threading.Tasks;
 
 using StackExchange.Redis;
 
 using Inversion.Data.Redis;
-using Inversion.Messaging.Model;
 using Inversion.Process;
-using log4net;
 
 namespace Inversion.Ultrastructure.Transport
 {
     public class RedisPubSubClient : RedisStore, IPubSubClient
     {
-        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-        private readonly StackExchange.Redis.RedisChannel _channel;
+        private readonly RedisChannel _channel;
 
         private readonly int _cancellationCycleTimeMS;
-
-        private readonly Guid _subscriberID = Guid.NewGuid();
 
         public RedisPubSubClient(string channel, string connections, int databaseNumber, int cancellationCycleTimeMS = 100)
             : base(connections, databaseNumber)
         {
-            _channel =
-                new StackExchange.Redis.RedisChannel(channel, StackExchange.Redis.RedisChannel.PatternMode.Pattern);
+            _channel = new RedisChannel(channel, RedisChannel.PatternMode.Pattern);
             _cancellationCycleTimeMS = cancellationCycleTimeMS;
         }
 
-        public void Subscribe(IProcessContext context, Func<bool> timeToGo, Action<string, string> handler)
+        /// <summary>
+        /// Use Redis Subscriber mechanism to subscribe to a particular channel.
+        /// Call the passed handler on message arrival.
+        /// Unsubscribe from the channel when the passed timeToGo function returns true.
+        /// </summary>
+        /// <param name="timeToGo">function that returns true when the subscription should be detached</param>
+        /// <param name="handler">function that will have the eventChannel and eventValue strings passed to it when a message is received</param>
+        public void Subscribe(Func<bool> timeToGo, Action<string, string> handler)
         {
 
             ISubscriber subscriber = this.ConnectionMultiplexer.GetSubscriber();
@@ -53,10 +52,12 @@ namespace Inversion.Ultrastructure.Transport
             cancellationTask.Wait();
         }
 
-        public void Publish(IEvent ev, IProcessContext context)
+        /// <summary>
+        /// Publish the passed event in JSON format on the store's channel.
+        /// </summary>
+        /// <param name="ev"></param>
+        public void Publish(IEvent ev)
         {
-            _log.Debug(String.Format("{0} published {1}\r\n----\r\n", _subscriberID, ev.Message));
-
             this.Database.Publish(_channel, ev.ToJson());
         }
     }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
+
+using log4net;
+
 using Inversion.Data;
 using Inversion.Messaging.Model;
 using Inversion.Naiad;
@@ -12,7 +13,6 @@ using Inversion.Process;
 using Inversion.Process.Behaviour;
 using Inversion.Process.Pipeline;
 using Inversion.Ultrastructure.Transport;
-using log4net;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
@@ -35,7 +35,7 @@ namespace Ultrastructure.Demo2
             {
                 pubSubClient.Start();
 
-                pubSubClient.Subscribe(context, timeToGo, (eventChannel, eventValue) =>
+                pubSubClient.Subscribe(timeToGo, (eventChannel, eventValue) =>
                 {
                     _log.Debug(String.Format("received {0}\r\n----\r\n", eventValue));
 

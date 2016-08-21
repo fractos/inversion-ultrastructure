@@ -12,6 +12,9 @@ using Inversion.Ultrastructure.Transport;
 
 namespace Inversion.Ultrastructure.Application.Behaviour
 {
+    /// <summary>
+    /// Publish an event (MessagingEvent) using the specified IPubSubClient transport
+    /// </summary>
     public class PublishEventBehaviour : PrototypedBehaviour
     {
         private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -33,7 +36,7 @@ namespace Inversion.Ultrastructure.Application.Behaviour
             {
                 pubSubClient.Start();
 
-                pubSubClient.Publish(publishEvent, context);
+                pubSubClient.Publish(publishEvent);
             }
         }
     }

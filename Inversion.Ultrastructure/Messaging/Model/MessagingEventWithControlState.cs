@@ -6,11 +6,12 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using Inversion.Collections;
+
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 using Inversion.Process;
-using Newtonsoft.Json.Linq;
+using Inversion.Collections;
 
 namespace Inversion.Messaging.Model
 {

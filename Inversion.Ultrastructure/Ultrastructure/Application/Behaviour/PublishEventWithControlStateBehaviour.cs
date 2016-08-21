@@ -14,6 +14,9 @@ using Inversion.Ultrastructure.Transport;
 
 namespace Inversion.Ultrastructure.Application.Behaviour
 {
+    /// <summary>
+    /// Publish an event (MessagingEventWithControlState) that has specified items copied into its control state from the context using the specified IPubSubClient transport
+    /// </summary>
     public class PublishEventWithControlStateBehaviour : PrototypedBehaviour
     {
         private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -41,7 +44,7 @@ namespace Inversion.Ultrastructure.Application.Behaviour
             {
                 pubSubClient.Start();
 
-                pubSubClient.Publish(publishEvent, context);
+                pubSubClient.Publish(publishEvent);
             }
         }
     }
