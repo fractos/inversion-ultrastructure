@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using StackExchange.Redis;
 
-using Inversion.Data.Redis;
+using Inversion.Data.Store;
 using Inversion.Process;
 
 namespace Inversion.Ultrastructure.Transport
