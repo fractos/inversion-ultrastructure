@@ -49,6 +49,10 @@
       <HintPath>..\packages\Inversion.Extensibility.1.0.0\lib\net452\Inversion.Extensibility.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Inversion.Messaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Inversion.Messaging.1.0.0\lib\net452\Inversion.Messaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Inversion.Naiad, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Inversion.Naiad.1.0.0\lib\net452\Inversion.Naiad.dll</HintPath>
       <Private>True</Private>

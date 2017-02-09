@@ -42,6 +42,10 @@
       <HintPath>..\packages\Inversion.Extensibility.1.0.0\lib\net452\Inversion.Extensibility.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Inversion.Messaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Inversion.Messaging.1.0.0\lib\net452\Inversion.Messaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Inversion.Process, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Inversion.Process.1.0.0\lib\net452\Inversion.Process.dll</HintPath>
       <Private>True</Private>
@@ -100,6 +104,7 @@
     <Folder Include="Ultrastructure\Process\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Inversion.Ultrastructure.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
